@@ -28,27 +28,35 @@ function fillSpiral() {
   }
 }
 
-function fillCircle(ratio) {
+function fillCircle(ratio, size) {
+  if (!size) {
+    size = 10;
+  }
+
+  if (!ratio) {
+    ratio = 1;
+  }
+
   var centerX = canvas.width / 2;
   var centerY = canvas.height / 2;
   var r = Math.min(canvas.width, canvas.height) / 2 * ratio;
 
   for (var theta = 0; theta < Math.PI * 2; theta += Math.PI / 16) {
-    system.addMolecule(10, centerX + Math.cos(theta) * r, centerY + Math.sin(theta) * r);
+    system.addMolecule(size, centerX + Math.cos(theta) * r, centerY + Math.sin(theta) * r);
   }
 }
 
 /*
-fillCircle(1);
-fillCircle(0.9);
-fillCircle(0.8);
-fillCircle(0.7);
+fillCircle(1, 5);
+fillCircle(0.9, 10);
+fillCircle(0.8, 30);
+fillCircle(0.7, 10);
 */
 
 canvas.onmousedown = function(e) {
   var rect = canvas.getBoundingClientRect();
 
-  system.addMolecule(10, e.clientX - rect.left, e.clientY - rect.top, 0);
+  system.addMolecule(Math.random() * 20 + 5, e.clientX - rect.left, e.clientY - rect.top, 0);
 };
 
 function draw() {
